@@ -1,12 +1,24 @@
+---
+
+resources:
+- name: git-on-boarding-pipeline
+  type: git
+  check_every: 2m
+  source:
+    uri: https://github.com/blgm/on-boarding-pipeline
+    branch: master
+
 jobs:
 - name: my-first-job
   plan:
+  - get: git-on-boarding-pipeline
   - task: our-task
     config:
+      inputs:
+      - name: git-on-boarding-pipeline
       platform: linux
       image_resource:
         type: docker-image
         source: {repository: alpine}
       run:
-        path: echo
-        args: ["Hello, world!"]
+        path: git-on-boarding-pipeline/task.sh
