@@ -1,8 +1,6 @@
-inputs:
-- name: git-on-boarding-pipeline
 platform: linux
 image_resource:
   type: docker-image
-  source: {repository: alpine}
+  source: {repository: "mirahimage/board"}
 run:
-  path: git-on-boarding-pipeline/task.sh
+  path: "/bin/hello.sh"
